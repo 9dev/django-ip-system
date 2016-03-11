@@ -1,0 +1,11 @@
+include LICENSE
+include README.md
+recursive-include ip_system/static *
+recursive-include ip_system/templates *
+recursive-include ip_system/templatetags *
+recursive-include ip_system/management *
+recursive-include ip_system/fixtures *
+recursive-include ip_system/resources *
+recursive-include ip_system/migrations *
+global-exclude *pyc
+global-exclude ~*
