@@ -4,7 +4,7 @@ from .utils import get_ip_from_request
 
 
 class Ip(models.Model):
-    address = models.GenericIPAddressField()
+    address = models.GenericIPAddressField(unique=True, db_index=True)
 
     @classmethod
     def get_or_create(cls, request):
