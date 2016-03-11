@@ -5,9 +5,13 @@ from main import views
 
 urlpatterns = [
     url(
-        r'^$',
-        views.dummy,
-        name='dummy'
+        r'^create$',
+        views.ArticleCreateView.as_view(),
+        name='article_create'
+    ),
+    url(
+        r'^article/(?P<pk>[0-9]+)',
+        views.ArticleDetailView.as_view(),
+        name='article_detail'
     ),
 ]
-

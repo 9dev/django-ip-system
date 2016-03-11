@@ -1,6 +1,13 @@
-from django.http import HttpResponse
+from django.views.generic import CreateView, DetailView
+
+from .forms import ArticleForm
+from .models import Article
 
 
-def dummy(request):
-    return HttpResponse('DummyResponse')
+class ArticleCreateView(CreateView):
+    model = Article
+    form_class = ArticleForm
 
+
+class ArticleDetailView(DetailView):
+    model = Article
