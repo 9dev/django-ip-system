@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import ip_address_validators
+from django.core.validators import validate_ipv46_address
 
 
 def get_ip_from_request(request):
@@ -12,7 +12,7 @@ def get_ip_from_request(request):
         ip = request.META.get(header)
         if ip:
             try:
-                ip_address_validators('both', ip)
+                validate_ipv46_address(ip)
                 return ip
             except ValidationError:
                 pass
