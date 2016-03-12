@@ -1,5 +1,8 @@
+from unittest.mock import patch
+
 from django.test import TestCase
 
+from .models import Ip
 from .utils import get_ip_from_request
 
 
@@ -40,3 +43,38 @@ class TestUtils(TestCase):
         request = RequestMock({'REMOTE_ADDR': 'cc.xx.cc.xx'})
         ip = get_ip_from_request(request=request)
         self.assertEqual(ip, None)
+
+
+@patch('ip_system.models.get_ip_from_request')
+class TestModels(TestCase):
+
+    def test_can_create_Ip_object_if_raw_ip_correct(self, mock_get_ip):
+        mock_get_ip.return_value = TEST_IP
+        request = None
+
+        Ip.get_or_create(request=request)
+        obj = Ip.objects.latest('pk')
+
+        mock_get_ip.assert_called_once_with(request)
+        self.assertEqual(obj.address, TEST_IP)
+
+    def test_can_create_Ip_object_if_ip_exists(self, mock_get_ip):
+        Ip.objects.create(address=TEST_IP)
+        mock_get_ip.return_value = TEST_IP
+        request = None
+
+        Ip.get_or_create(request=request)
+        obj = Ip.objects.latest('pk')
+
+        mock_get_ip.assert_called_once_with(request)
+        self.assertEqual(obj.address, TEST_IP)
+
+    def test_cannot_create_Ip_object_if_raw_ip_incorrect(self, mock_get_ip):
+        mock_get_ip.return_value = None
+        request = None
+
+        obj = Ip.get_or_create(request=request)
+
+        mock_get_ip.assert_called_once_with(request)
+        self.assertEqual(Ip.objects.all().count(), 0)
+        self.assertEqual(obj, None)
