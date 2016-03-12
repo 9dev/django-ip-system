@@ -40,12 +40,14 @@ def ftest(target):
 def utest():
     with _venv_local():
         _django_local('test ip_system.tests -v 2')
+        _django_local('test main.tests -v 2')
 
 
 def testall():
     with _venv_local():
         local('rm -f {}/.coverage*'.format(DEMO_PATH))
         local('coverage run -p {}/manage.py test ip_system.tests -v 2'.format(DEMO_PATH))
+        local('coverage run -p {}/manage.py test main.tests -v 2'.format(DEMO_PATH))
         local('coverage run -p {}/manage.py test fts --pattern="*" -v 2'.format(DEMO_PATH))
         local('coverage combine')
         local('coverage report -m --omit="{}/*"'.format(VENV_PATH))
