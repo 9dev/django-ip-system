@@ -5,6 +5,11 @@ from main import views
 
 urlpatterns = [
     url(
+        r'^$',
+        views.ArticleListView.as_view(),
+        name='article_list'
+    ),
+    url(
         r'^create$',
         views.ArticleCreateView.as_view(),
         name='article_create'

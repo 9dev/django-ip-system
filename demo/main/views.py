@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 from ip_system.models import Ip
 
@@ -17,4 +17,8 @@ class ArticleCreateView(CreateView):
 
 
 class ArticleDetailView(DetailView):
+    model = Article
+
+
+class ArticleListView(ListView):
     model = Article
