@@ -14,9 +14,9 @@ setup(
     packages=['ip_system'],
     include_package_data=True,
     license='MIT License',
-    description='...',
+    description='Adds simple IP model to your Django project.',
     long_description=README,
-    url='...',
+    url='https://github.com/9dev/django-ip-system',
     author='9dev',
     author_email='9devmail@gmail.com',
     classifiers=[
