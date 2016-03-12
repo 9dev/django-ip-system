@@ -11,22 +11,24 @@ Adds simple IP model to your Django project. Allows you to keep track of who cre
 
 - Add a new field to your model:
 
-
+    ```
     from ip_system.fields import IpField
     
     class MyModel(models.Model):
         ...
         author_ip = IpField()
+    ```
             
 - Populate it while creating your model objects. Most often you want to create in from current request in your view:
 
-
+    ```
     from ip_system.models import Ip
 
     def create_object(request):
         obj = MyModel()
         obj.author_ip = Ip.get_or_create(request=self.request)  # or Ip.objects.get_or_create(address=raw_ip_address) 
         ...
+    ```
 
 ## Demo
 
