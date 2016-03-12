@@ -50,6 +50,3 @@ class TestIpSystem(BaseTestCase):
         # She can see her IP address there.
         ip_elem = self.get_by_id('id_author_ip')
         self.assertEqual(ip_elem.text, SELENIUM_IP)
-
-    def test_can_cope_with_incorrect_ip(self):
-        self.fail()
