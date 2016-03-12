@@ -9,6 +9,9 @@ class Ip(models.Model):
     @classmethod
     def get_or_create(cls, request):
         raw_ip = get_ip_from_request(request)
+        if not raw_ip:
+            return None
+
         obj, _ = cls.objects.get_or_create(address=raw_ip)
         return obj
 
